@@ -1,13 +1,10 @@
 import Link from "next/link";
-import { signIn , signOut, useSession} from "next-auth/react"
+import { signIn, signOut, useSession } from "next-auth/react";
 import { Button, Card } from "react-bootstrap";
-
-const Home = () => {
-
+const FacebookLoginPage = () => {
     const {data: session , status } = useSession();
-    //const [user, setUser] = useState({});
     const user = {}
-    
+
     if (status === "authenticated") {
         console.log(session.user.email)
         //setUser(session.user)
@@ -16,34 +13,33 @@ const Home = () => {
 
     console.log(user);
 
-
     return ( 
         <div className="container">
-            <div className="google-login-btn-container mt-5">
+            <div className="facebook-login-btn-container mt-5">
                 {
                     status === "unauthenticated" ? (
-                        <div className="google-sign-in-btn text-center">
+                        <div className="facebook-sign-in-btn text-center">
                             <Link href='/api/auth/signin'>
                                 <Button
                                     onClick={e => {
                                         e.preventDefault()
-                                        signIn("google")
+                                        signIn("facebook")
                                     }}
                                 >
-                                    Sign In with Google
+                                    Sign In with facebook
                                 </Button>
                             </Link>
                        </div>
                     ) : (
-                        <div className="google-signout-btn-container text-center">
+                        <div className="facebook-signout-btn-container text-center">
                             <Link href='/api/auth/signout'>
                                 <Button
                                     onClick={e => {
                                         e.preventDefault()
-                                        signOut("google")
+                                        signOut("facebook")
                                     }}
                                 >
-                                    Sign out with Google    
+                                    Sign out with facebook    
                                 </Button>
                             </Link>
                         </div>
@@ -70,6 +66,4 @@ const Home = () => {
      );
 }
  
-export default Home;
-
-    
+export default FacebookLoginPage;
